@@ -6,16 +6,18 @@ import { Injectable } from '@angular/core';
 })
 export class PitagorasService {
   constructor(private httpclient: HttpClient) {}
+
+  api_url = 'https://iansbritoti.pythonanywhere.com/calculator'
   
-  calcular(a: number, b: number) {
-    return this.httpclient.post('http://localhost:5000/calculator', {
+  calcular_hipotenusa(a: number, b: number) {
+    return this.httpclient.post(`${this.api_url}/hipotenusa`, {
       a: a,
       b: b,
     });
   }
-  ca(a: number, b: number) {
-    return this.httpclient.post('http://localhost:5000/ca', {
-      a: a,
+  calcular_cateto(a: number, b: number) {
+    return this.httpclient.post(`${this.api_url}/cateto`, {
+      a : a,
       b: b,
     });
   }

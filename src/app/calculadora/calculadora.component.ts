@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { PitagorasService } from '../pitagoras.service';
 import { FormsModule } from '@angular/forms'
 
@@ -7,10 +7,10 @@ import { FormsModule } from '@angular/forms'
   templateUrl: './calculadora.component.html',
   styleUrls: ['./calculadora.component.css'],
 })
-export class CalculadoraComponent implements OnInit {
-  msg_resultado=''
+export class CalculadoraComponent {
+  msg_error=null;
   menu=['Hipotenusa', 'Catetos']
-  opt_menu=''
+  opt_menu='';
   valores: any={
     a: '',
     b: '',
@@ -20,36 +20,34 @@ export class CalculadoraComponent implements OnInit {
 
   constructor(private pitagorasService: PitagorasService) {}
 
-  ngOnInit(): void {
-    console.log('CarregueiOnInit');
-    
-  }
+
   onSubmit(){
-    console.log('CarregueiSubmit')
-    console.log(this.valores)
-    console.log(this.opt_menu)
+    
+    this.valores.c = null;
+    this.msg_error = null;
+  
     if (this.opt_menu == 'Hipotenusa'){
-      this.pitagorasService.calcular(this.valores.a, this.valores.b).subscribe(
-        (resultado) => {
-          console.log(this.valores.c)
-          this.valores = resultado
-         
+      this.pitagorasService.calcular_hipotenusa(this.valores.a, this.valores.b).subscribe(
+        (resultado: any) => {
+          this.valores.c = resultado['valor_c'];
+          this.msg_error = null;
         },
         (error) => {
-          console.log('Error' + error.error);
+          this.msg_error = error.error;
+          this.valores.c = null;
         }
       ); 
     }
     
     else if (this.opt_menu == 'Catetos'){
-      this.pitagorasService.ca(this.valores.a, this.valores.b).subscribe(
-        (resultado) => {
-          console.log(this.valores.c)
-          this.valores = resultado
-         
+      this.pitagorasService.calcular_cateto(this.valores.a, this.valores.b).subscribe(
+        (resultado: any) => {
+          this.valores.c = resultado['valor_c'];
+          this.msg_error = null;
         },
         (error) => {
-          console.log('Error' + error.error);
+          this.msg_error = error.error;
+          this.valores.c = null;
         }
       ); 
     }

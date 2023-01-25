@@ -1,19 +1,22 @@
-<div style="text-align: center; width: 100%;margin-top: 50px;">
-    <select [(ngModel)]="opt_menu">
-      <option *ngFor="let item of menu" [value]="item">{{item}}</option>
-    </select>
+<div class="container">
+  <div class="row">
+    <div class="offset-4 col-4 text-center">
+      <div class="card">
+        <pre *ngIf="opt_menu">Calculadora de {{opt_menu}}</pre>
+        <select class="form-select" [(ngModel)]="opt_menu">
+          <option value="" selected="selected">Selecione o tipo de operação</option>
+          <option *ngFor="let item of menu" [value]="item">{{item}}</option>
+        </select>
+        <input class="w-100" [(ngModel)]="valores.a" type="text" placeholder="Digite o valor de A">
+        <input class="w-100" [(ngModel)]="valores.b" type="text" placeholder="Digite o valor de B">
+        <button (click)="onSubmit()">Calcular</button>
+        <div class="alert alert-primary" role="alert" *ngIf="valores['c']">
+          Resultado é: {{valores['c']}}
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="msg_error">
+          {{ msg_error }}
+        </div>
+      </div>
+    </div>
   </div>
-  
-  <div style="text-align: center; width: 100%;margin-top: 50px;"><pre>{{opt_menu}}</pre></div>
-<div style="text-align: center; width: 100%;margin-top: 50px;">     
-    <input [(ngModel)]="valores.a" type="text" placeholder="Digite o valor de A" style="width: 500px;font-size: 15px;height: 30px;">
-    <input [(ngModel)]="valores.b" type="text" placeholder="Digite o valor de B" style="width: 500px;font-size: 15px;height: 30px;">
 </div>
-<div style="text-align: center; width: 100%;margin-top: 50px;">
-    <button (click)="onSubmit()">Calcular</button>
-    
-    
-</div>
-
-
-<h1>Resultado é: {{valores['c']}}</h1>
