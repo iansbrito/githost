@@ -33,11 +33,11 @@ def ca():
     except ValueError:
         return make_response("Informe o número de A e B.", 400)
     if a>b:
-        co = float(b)
-        h = float(a)
+        co = b
+        h = a
     if b>a:
-        co=float(a)
-        h=float(b)
+        co=a
+        h=b
     ca=((h**2)-(co**2))**(1/2)
     
     return jsonify({'a': a,'b':b, 'c':ca})
