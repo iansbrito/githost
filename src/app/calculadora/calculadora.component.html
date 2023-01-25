@@ -1,0 +1,8 @@
+<div style="text-align: center; width: 100%;margin-top: 50px;">
+    <input [(ngModel)]="valores.a" type="text" placeholder="Digite o valor de A" style="width: 500px;font-size: 15px;height: 30px;">
+    <input [(ngModel)]="valores.b" type="text" placeholder="Digite o valor de B" style="width: 500px;font-size: 15px;height: 30px;">
+    <button (click)="onSubmit()">Calcular"</button>
+
+</div>
+
+<h1>Resultado é: {{valores['c']}}</h1>
