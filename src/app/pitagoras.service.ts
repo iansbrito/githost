@@ -13,4 +13,10 @@ export class PitagorasService {
       b: b,
     });
   }
+  ca(a: number, b: number) {
+    return this.httpclient.post('http://localhost:5000/ca', {
+      a: a,
+      b: b,
+    });
+  }
 }
